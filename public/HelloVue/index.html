@@ -7,15 +7,30 @@
     </head>
     <bod>
         <div id="simple">
-            <h2>{{message}}</h2>
+            <h2>{{message0}}</h2>
+            <h2 v-text="message1"></h2>
+            <h2 v-html="message2"></h2>
+        </div>
+        <div id="simple2">
+            <input id="a" type="text" v-bind:value="message3"><br>
+            <img v-bind:src="imagePath" />
         </div>
         <script type="text/javascript">
             var model = {
-                message: "FIRST VUE.JS APP"
-            }
+                message0: "FIRST VUE.JS APP",
+                message1: "<i>the v-text directive encodes tag strings to HTML</i>",
+                message2: "<i>the v-html directive parses tag strings</i>",
+                message3: "v-bind directive",
+                imagePath: "http://sample.bmaster.kro.kr/photos/61.jpg"
+            };
 
             var simple = new Vue({
                 el: '#simple',
+                data: model
+            });
+
+            var simple2 = new Vue({
+                el: '#simple2',
                 data: model
             });
         </script>
