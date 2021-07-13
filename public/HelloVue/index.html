@@ -5,17 +5,43 @@
         <title>HELLO VUE</title>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     </head>
-    <bod>
+    <body>
+        <!-- VIEW -->
         <div id="simple">
+            <!-- Mustache expression. Used to render data to HTML DOM declaratively -->
             <h2>{{message0}}</h2>
             <h2 v-text="message1"></h2>
             <h2 v-html="message2"></h2>
         </div>
+
         <div id="simple2">
             <input id="a" type="text" v-bind:value="message3"><br>
             <img v-bind:src="imagePath" />
         </div>
+
+        <div id="twoway">
+            <!-- the v-model directive ensures a two-way data binding, unlike v-bind-->
+            <input type="text" v-model="name" placeholder="enter name"><br>
+            Entered name: <h2 v-html="name"></h2>
+        </div>
+
+        <div id="simple3">
+            <div>SELECT THE FRUITS OF YOUR CHOICE: </div>
+            <!-- since this uses the v-model directed, the fruits array is updated upon interaction -->
+            <input type="checkbox" value="1" v-model="fruits"> APPLE
+            <input type="checkbox" value="2" v-model="fruits"> KIWI
+            <input type="checkbox" value="3" v-model="fruits"> WATERMELON   
+            <input type="checkbox" value="4" v-model="fruits"> GRAPES
+            <input type="checkbox" value="5" v-model="fruits"> DRAGONFRUIT
+        </div>
+        <hr>
+
+        <div id="simple4">
+            SELECTED FRUITS: <span v-html="fruits"></span>
+        </div>
+
         <script type="text/javascript">
+            // MODEL: data. when something is altered in the MODEL, it is immediately reflected on the VIEW
             var model = {
                 message0: "FIRST VUE.JS APP",
                 message1: "<i>the v-text directive encodes tag strings to HTML</i>",
@@ -24,15 +50,37 @@
                 imagePath: "http://sample.bmaster.kro.kr/photos/61.jpg"
             };
 
+            var model2 = {
+                fruits: []
+            }
+
+            // VIEW MODELS: state and calculations
             var simple = new Vue({
-                el: '#simple',
-                data: model
+                el: '#simple', // corresponds to the html element
+                data: model // corresponds to the MODEL
             });
 
             var simple2 = new Vue({
                 el: '#simple2',
                 data: model
             });
+
+            var twoway = new Vue({
+                el: '#twoway',
+                data: {
+                    name: ''
+                }
+            });
+
+            var simple3 = new Vue({
+                el: '#simple3',
+                data: model2
+            });
+
+            var simple4 = new Vue({
+                el: '#simple4',
+                data: model2
+            })
         </script>
-    </bod>
+    </body>
 </html>
