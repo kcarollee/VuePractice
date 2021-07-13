@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- LIST RENDERING -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HELLO VUE 3</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="nametable">
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>no</th><th>name</th><th>tel</th><th>address</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <!-- for each element in the contacts array -->
+                <tr v-for="contact in contacts">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <table id="list">
+            <template v-for="(contact, index) in contacts">
+                <tr>
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+
+                <tr v-if="index % 5 == 4">
+                    <td colspan="4"></td>
+                </tr>
+                
+            </template>
+        </table>
+        
+
+        </div>
+
+        <br>
+        <select id="keyval">
+            <option disabled="disabled">SELECT A REGION</option>
+            <option v-for="(val, key) in regions" v-bind:value="key">{{val}}</option>
+        </select>
+
+        <script type="text/javascript">
+           var model = {
+            "pageno": 1,
+            "pagesize": 10,
+            "totalcount": 100,
+            "contacts": [
+                {"no": 100, "name": "AAAAA", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "BBBBB", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "AqwdwAA", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "AAqwdAA", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "AAqwA", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "AAasdA", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "AqwdAA", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "AasdAA", "tel": "010-1010-1010", "address": "qwdasd"},
+                {"no": 100, "name": "AAqwdAA", "tel": "010-1010-1010", "address": "qwdasd"},
+            ]
+           }
+
+           var list = new Vue({
+            el: "#nametable",
+            data: model
+           })
+
+           var regions = {
+            "A" : "Asia",
+            "B" : "America",
+            "C" : "Europe",
+            "D" : "AFRICA"
+           }
+
+           var keyval = new Vue({
+            el: "#keyval",
+            data: {regions: regions}
+           })
+        </script>
+    </body>
+</html>
