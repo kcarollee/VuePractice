@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+	<title>Vue Instance 1</title>
+</head>
+
+
+<body>
+<div id="example">
+	Price: <span>{{amount}}</span>
+	
+</div>
+<script type="text/javascript">
+	var vm = new Vue({
+		el: "#example",
+		data: {amt: 12321313},
+		computed:{
+			// separation of getter and setter
+			amount:{
+				get: function(){
+					var s = new String("" + this.amt); // 'this' refers to the data
+					var result = "";
+					var num = 0;
+					for (var i = s.length - 1; i >= 0; i--){
+						result = s[i] + result;
+						if (num % 3 === 2 && i !== 0) result = ", " + result
+							num++;
+					}
+					return result;
+				},
+				set: function(amt){
+					if (typeof(amt) === "string"){
+						var result = parseInt(amt.replace(/,/g/ "")); // regex
+						if (isNaN(result)) this.amt = 0;
+						else this.amt = result;
+					} else if (typeof(amt) === "number") this.amt = amt;
+				}
+			}
+		}
+	});
+</script>
+</body>
+</html>

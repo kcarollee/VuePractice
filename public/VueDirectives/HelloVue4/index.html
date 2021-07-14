@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--Computed Property -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HELLO VUE 3</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <div id="example">
+            <p>
+            Country name: <input type="text" v-model="countryName" placeholder="Country Name">
+            </p>
+        
+
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>num</th><th>name</th><th>capital</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="c in filtered">
+                    <td>{{c.no}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.capital}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <script type="text/javascript">
+            var model = {
+                countryName: "",
+                countries: [
+                    {no: 1, name: "america", capital: "washington"},
+                    {no: 2, name: "korea", capital: "seoul"},
+                    {no: 3, name: "japan", capital: "tokyo"},
+                    {no: 4, name: "france", capital: "paris"},
+                    {no: 5, name: "qwdqwd", capital: "wasdn"},
+                ]
+            }
+            var clist = new Vue({
+                    el: "#example",
+                    data: model,
+                    computed: {
+                        filtered: function(){
+                            var cname = this.countryName.trim();
+                            console.log(cname);
+                            var g =  this.countries.filter(function(item, index){
+                                if (item.name.indexOf(cname) > -1) return true; // return true if cname, which is the user input, is in the name of the item. 'return item' also works
+                            })
+                            console.log(g);
+                            return g;
+                        }
+                    }
+                })
+            
+        </script>
+    </body>
+</html>
